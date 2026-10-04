@@ -1,0 +1,12 @@
+{
+  "time": "2026-10-04 13:18:08",
+  "n": 3507,
+  "views": [
+    "full224",
+    "full256",
+    "full288"
+  ],
+  "space": "logit",
+  "T": 1.0885909942646859,
+  "via": "final.run_test_once"
+}

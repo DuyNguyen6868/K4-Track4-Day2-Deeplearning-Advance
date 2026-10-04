@@ -1,0 +1,222 @@
+{
+  "backbone_primary": "convnext_tiny",
+  "backbone_light": "efficientnet_b0",
+  "backbone_reason": "ứng viên trong 0.003 macro-F1 val của tốt nhất (0.9568): ['convnext_tiny', 'swin_tiny']; chọn độ trễ batch-1 thấp nhất",
+  "backbone_table": {
+    "resnet50": {
+      "val_macro_f1": 0.810390558397997,
+      "params_M": 23.526473,
+      "gmacs": 4.087154688,
+      "latency_b1_ms": 6.165790999943965
+    },
+    "resnext50": {
+      "val_macro_f1": 0.7538457138186754,
+      "params_M": 22.998345,
+      "gmacs": 4.228450304,
+      "latency_b1_ms": 9.390462000055777
+    },
+    "convnext_tiny": {
+      "val_macro_f1": 0.9568193163104759,
+      "params_M": 27.827049,
+      "gmacs": 4.454770176,
+      "latency_b1_ms": 5.860663499788643
+    },
+    "deit_small": {
+      "val_macro_f1": 0.9443268652753924,
+      "params_M": 21.669129,
+      "gmacs": 4.240838016,
+      "latency_b1_ms": 5.418101999794089
+    },
+    "swin_tiny": {
+      "val_macro_f1": 0.954402248249569,
+      "params_M": 27.526275,
+      "gmacs": 4.489805568,
+      "latency_b1_ms": 9.807599999476224
+    },
+    "efficientnet_b0": {
+      "val_macro_f1": 0.7694236235984505,
+      "params_M": 4.019077,
+      "gmacs": 0.384546272,
+      "latency_b1_ms": 7.924234499569138
+    },
+    "mobilenetv3": {
+      "val_macro_f1": 0.7120865906114762,
+      "params_M": 4.213561,
+      "gmacs": 0.21532128,
+      "latency_b1_ms": 6.5598525002315
+    }
+  },
+  "noise": {
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "val_macro_f1": [
+      0.9568193163104759,
+      0.9492366261053437,
+      0.9550600300299015
+    ],
+    "mean": 0.9537053241485737,
+    "std": 0.003968717513936993
+  },
+  "winners": [],
+  "threshold": 0.007937435027873986,
+  "winners_table": {
+    "T01": {
+      "desc": "frozen",
+      "axis": "A",
+      "slot": "init",
+      "val_macro_f1": 0.6862176565808116,
+      "delta": -0.2706016597296643,
+      "winner": false,
+      "adoptable": true
+    },
+    "T02": {
+      "desc": "scratch",
+      "axis": "A",
+      "slot": "init",
+      "val_macro_f1": 0.5818364843805794,
+      "delta": -0.37498283192989645,
+      "winner": false,
+      "adoptable": true
+    },
+    "T03": {
+      "desc": "color",
+      "axis": "B",
+      "slot": "aug",
+      "val_macro_f1": 0.9506693379974424,
+      "delta": -0.006149978313033544,
+      "winner": false,
+      "adoptable": true
+    },
+    "T04": {
+      "desc": "trivial",
+      "axis": "B",
+      "slot": "aug",
+      "val_macro_f1": 0.9519626767998098,
+      "delta": -0.004856639510666061,
+      "winner": false,
+      "adoptable": true
+    },
+    "T05": {
+      "desc": "cutmix",
+      "axis": "B",
+      "slot": "mix",
+      "val_macro_f1": 0.9554809332192126,
+      "delta": -0.0013383830912633288,
+      "winner": false,
+      "adoptable": true
+    },
+    "T06": {
+      "desc": "mixup",
+      "axis": "B",
+      "slot": "mix",
+      "val_macro_f1": 0.9533610587628396,
+      "delta": -0.00345825754763629,
+      "winner": false,
+      "adoptable": true
+    },
+    "T07": {
+      "desc": "labelsmooth",
+      "axis": "C",
+      "slot": "loss",
+      "val_macro_f1": 0.9520710893198117,
+      "delta": -0.004748226990664239,
+      "winner": false,
+      "adoptable": true
+    },
+    "T08": {
+      "desc": "focal",
+      "axis": "C",
+      "slot": "loss",
+      "val_macro_f1": 0.9503120894127987,
+      "delta": -0.006507226897677243,
+      "winner": false,
+      "adoptable": true
+    },
+    "T09": {
+      "desc": "weightedce",
+      "axis": "C",
+      "slot": "loss",
+      "val_macro_f1": 0.9487732675700798,
+      "delta": -0.00804604874039605,
+      "winner": false,
+      "adoptable": true
+    },
+    "T10": {
+      "desc": "balanced",
+      "axis": "D",
+      "slot": "sampler",
+      "val_macro_f1": 0.9430823034732193,
+      "delta": -0.01373701283725659,
+      "winner": false,
+      "adoptable": true
+    },
+    "T11": {
+      "desc": "lr_equal",
+      "axis": "E",
+      "slot": "lr",
+      "val_macro_f1": 0.9492162720181003,
+      "delta": -0.0076030442923755714,
+      "winner": false,
+      "adoptable": true
+    },
+    "T12": {
+      "desc": "ema",
+      "axis": "F",
+      "slot": "ema",
+      "val_macro_f1": 0.9558277620491218,
+      "delta": -0.0009915542613541106,
+      "winner": false,
+      "adoptable": true
+    },
+    "T13": {
+      "desc": "res256",
+      "axis": "G",
+      "slot": "res",
+      "val_macro_f1": 0.9557480372016802,
+      "delta": -0.0010712791087956752,
+      "winner": false,
+      "adoptable": false
+    }
+  },
+  "combo": {
+    "members": [],
+    "overrides": {}
+  },
+  "recipe_id": "T00",
+  "recipe_overrides": {},
+  "recipe_reason": "ứng viên {T00: 0.9568}; chọn T00 (ngưỡng 0.0079)",
+  "inference": {
+    "set_id": "I03d",
+    "views": [
+      "full224",
+      "full256",
+      "full288"
+    ],
+    "space": "logit",
+    "gain_vs_I00": 0.010099834828644294,
+    "reason": "I03d có macro-F1 val cao nhất (0.9669), hơn I00 +0.0101 >= 0.002"
+  },
+  "realtime": {
+    "exp_id": "I08b",
+    "method": "FP16 (model.half())",
+    "dtype": "fp16",
+    "fused_bn": false,
+    "p50_ms": 5.592677999970874,
+    "p95_ms": 6.1963568998749,
+    "p99_ms": 6.510838970061744,
+    "val_macro_f1": 0.9570792345825144,
+    "within_budget": true,
+    "gpu": "Tesla T4",
+    "latency_includes_preprocessing": false
+  },
+  "temperature_note": "T khớp riêng cho từng seed trên val",
+  "temperatures": {
+    "0": 1.0816269345597185,
+    "1": 1.0611646321353205,
+    "2": 1.0885909942646859
+  },
+  "test_opened": true
+}

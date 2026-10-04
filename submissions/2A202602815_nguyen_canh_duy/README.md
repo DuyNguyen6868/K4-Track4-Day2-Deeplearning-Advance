@@ -1,18 +1,18 @@
 # Bài làm Lab Day 2: DeepWeeds (backbone, công thức huấn luyện, suy luận)
 
 - **Họ tên / MSSV:** Nguyễn Cảnh Duy / 2A202602815
-- **Link chạy lại (Kaggle/Colab notebook):** `<!-- TODO: dán link Kaggle notebook công khai hoặc chia sẻ cho giảng viên -->`
-- **Nơi lưu checkpoint (nếu chia sẻ):** `<!-- TODO hoặc "không chia sẻ" -->`
+- **Link chạy lại (Kaggle notebook):** <https://www.kaggle.com/code/cnhduynguyn/notebookea0baa0d83>
+- **Nơi lưu checkpoint:** không chia sẻ riêng; `best.pt` của từng lần chạy nằm trong Output của notebook Kaggle (`runs/<exp_id>/seed<k>/`).
+- **Kết quả chính (test, 3 seed):** `F01` macro-F1 0,9649 ± 0,0006, top-1 0,9734 ± 0,0002; mốc `T00 + I00` macro-F1 0,9497 ± 0,0045. Chi tiết: `report.md`.
 
-> **Trạng thái các sản phẩm.** `code/` đã hoàn chỉnh và có test chạy trên CPU. `results.xlsx`, `curves/`, `predictions/`,
-> `figures/`, `logs/`, `scores/`, `decisions.json`, `report_tables.md` **chỉ có sau khi chạy notebook trên GPU**
-> (xem "Chạy lại"). `report.md` hiện là khung, các chỗ `[SỐ]`/`TODO` điền từ số thật.
+> **Trạng thái các sản phẩm.** Đủ 6 sản phẩm: `results.xlsx`, `report.md`, `curves/` (26 ảnh), `code/`, README này,
+> `predictions/` (15 file). Mọi số liệu sinh ra từ lần chạy notebook trên Kaggle (GPU Tesla T4) ngày 2026-10-04.
 
 ## Cấu trúc
 
 ```
 README.md            # file này
-report.md            # báo cáo (điền sau khi có số)
+report.md            # báo cáo
 results.xlsx         # 7 sheet: Backbones, Training, Inference, Final, PerClass, Latency, Summary  (do results.py sinh)
 report_tables.md     # bảng markdown sinh từ cùng số liệu để dán vào report.md
 decisions.json       # các quyết định chọn cấu hình (chỉ dùng val), có lý do
@@ -61,15 +61,25 @@ python $C/results.py --xlsx results.xlsx --check    # kiểm tra nhất quán
 `eval.py` gốc nằm ở gốc repo (không sửa); `code/evalref.py` tìm nó bằng cách đi lên các thư mục cha
 hoặc biến môi trường `LAB_EVAL_PY`.
 
+### Cách tôi đã chạy trên Kaggle (hai lượt)
+
+1. **Version 1** (*Save & Run All*, `CONFIRM_OPEN_TEST = False`): Bước 0-3, chỉ dùng train và val, mất 4 giờ 52 phút.
+2. **Lượt mở test**: gắn Output của Version 1 làm Input, đặt `RESTORE_FROM` tới thư mục chứa `runs/`, đổi
+   `CONFIRM_OPEN_TEST = True`, rồi *Save & Run All*. Các lần train đã xong được bỏ qua; Bước 3 chạy lại trên val, Bước 4
+   chạy test đúng một lần cho mỗi (exp_id, seed), Bước 5 dựng `results.xlsx`.
+
+Chạy một lượt duy nhất với `CONFIRM_OPEN_TEST = True` và `RESTORE_FROM = ""` cũng cho kết quả tương đương (khoảng 5 giờ trên T4).
+Ô cuối của notebook xoá `data/` để Kaggle không lưu 17.509 ảnh vào Output.
+
 ## Thiết lập tái lập
 
 | Mục | Giá trị |
 |---|---|
 | Dữ liệu | DeepWeeds, ảnh 17.509 (MD5 `b7b30f96d466fba86016aa5a26606e0f`), fold 0 chia sẵn, không sửa |
 | Seed | 0 cho Bước 1-3; 0, 1, 2 cho `T00` và chung kết (`F01`) |
-| GPU / torch / timm / Python | `<!-- TODO: điền từ logs/*/seed*/summary.json (gpu, torch, timm) -->` |
+| GPU / torch / timm / Python | Tesla T4 (Kaggle) / 2.11.0+cu128 / 1.0.29 / 3.13.15 |
 | Trọng số | timm, tag ghim (`code/model.py` → `SUGGESTED_BACKBONES`); tag thực dùng ở cột "tag trọng số" của `Backbones` |
-| Số epoch / ngân sách | mặc định theo `code/train.py`; nếu hạ bằng `--epochs`: `<!-- TODO ghi rõ, hoặc "không hạ" -->` |
+| Số epoch / ngân sách | 12 epoch, batch 64 (mặc định của `code/train.py`), không hạ; không chạy `T14`-`T19`; không có `T20` vì không yếu tố nào thắng |
 | Tất định | seed Python/NumPy/PyTorch cố định; AMP và vài toán tử CUDA không tất định bit, nên chạy lại cho kết quả gần, không nhất thiết trùng |
 
 ## Các quyết định thiết kế (giải thích ngắn)
@@ -93,4 +103,5 @@ các con số trong test **không có ý nghĩa khoa học**.
 
 ## Công cụ hỗ trợ
 
-`<!-- TODO: nêu rõ nếu có dùng trợ lý AI để viết/rà code, theo quy định của lớp về trung thực học thuật (README gốc mục 6) -->`
+Có dùng trợ lý AI (Claude Code) để viết và rà code, và để soạn thảo báo cáo từ số liệu đã chạy. Mọi thí nghiệm do tôi chạy
+trên tài khoản Kaggle của mình; mọi con số truy ngược được tới `logs/` và `predictions/`.

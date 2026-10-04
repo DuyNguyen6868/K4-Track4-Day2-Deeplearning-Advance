@@ -1,0 +1,22 @@
+{
+  "backbone": "resnet50.a1_in1k",
+  "device": "cuda",
+  "mean": [
+    0.485,
+    0.456,
+    0.406
+  ],
+  "std": [
+    0.229,
+    0.224,
+    0.225
+  ],
+  "initial_loss": 2.191340684890747,
+  "ln9": 2.1972245773362196,
+  "initial_loss_ok": true,
+  "overfit_first_loss": 2.1685681343078613,
+  "overfit_last_loss": 0.00012827578757423908,
+  "overfit_acc_eval": 1.0,
+  "overfit_ok": true,
+  "ok": true
+}
